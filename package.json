@@ -1,0 +1,32 @@
+{
+  "name": "aiken-cardano-typescript",
+  "version": "1.0.0",
+  "description": "Aiken-cardano Create smart contract on cardano using aiken",
+  "main": "index.js",
+  "scripts": {
+    "test": "deno test --allow-read --allow-write",
+    "build":"tsc",
+    "lint": "eslint .",
+    "generate-address": "deno run --allow-net --allow-write src/generate-credentials.ts",
+    "lock-contract": "deno run --allow-net --allow-read --allow-env src/hello-world-lock.ts",
+    "unlock-contract": "deno run --allow-net --allow-read --allow-env src/hello-world-unlock.ts dedcbf678b3121c05929d3d8f3f9ac95ba9760a227b74c64553cf4e6ba98e64e"
+  },
+  "author": "Micheal Durodola",
+  "license": "ISC",
+  "devDependencies": {
+    "@eslint/compat": "^1.0.1",
+    "@eslint/js": "^9.3.0",
+    "@types/node": "^20.12.12",
+    "@typescript-eslint/eslint-plugin": "^7.10.0",
+    "@typescript-eslint/parser": "^7.10.0",
+    "globals": "^15.3.0",
+    "ts-jest": "^29.1.4",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.5",
+    "typescript-eslint": "^7.10.0"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "lucid-cardano": "^0.10.7"
+  }
+}

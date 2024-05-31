@@ -1,0 +1,54 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build TypeScript project
+        run: npm run build
+
+      - name: Setup Deno
+        uses: denoland/setup-deno@v1
+        with:
+          deno-version: v1.x
+
+      - name: Cache Deno modules
+        uses: actions/cache@v2
+        with:
+          path: ~/.cache/deno
+          key: ${{ runner.os }}-deno-cache-${{ hashFiles('**/*lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-deno-cache-
+
+      - name: Cache Deno deps
+        uses: actions/cache@v2
+        with:
+          path: ~/.deno/deps
+          key: ${{ runner.os }}-deno-deps-${{ hashFiles('**/*lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-deno-deps-
+
+      - name: Run Deno tests
+        env:
+          $(cat .env | sed 's/#.*//g' | xargs): ${{ secrets.DENO_ENV_VARS }}
+        run: deno test --allow-read --allow-write
