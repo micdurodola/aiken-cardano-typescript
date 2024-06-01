@@ -9,7 +9,7 @@
     "lint": "eslint .",
     "generate-address": "deno run --allow-net --allow-write src/generate-credentials.ts",
     "lock-contract": "deno run --allow-net --allow-read --allow-env src/hello-world-lock.ts",
-    "unlock-contract": "deno run --allow-net --allow-read --allow-env src/hello-world-unlock.ts dedcbf678b3121c05929d3d8f3f9ac95ba9760a227b74c64553cf4e6ba98e64e"
+    "unlock-contract": "deno run --allow-net --allow-read --allow-env src/hello-world-unlock.ts <random-string>"
   },
   "author": "Micheal Durodola",
   "license": "ISC",
